@@ -1,4 +1,4 @@
-// Package netmask returns the shorthand netmask from an IPv4 netmask string.
+// Package netmask returns the CIDR notation from an IPv4 netmask string.
 package netmask
 
 import (
@@ -9,17 +9,13 @@ import (
 
 func countBits(value uint32) (count int, err error) {
 	// reading right to left, error when find 0 after find 1
-	var foundOne bool
 	for value > 0 {
 		rem := value & 1
-		value = value >> 1
-		if rem == 0 && foundOne {
+		if rem == 0 && count > 0 {
 			return 0, errors.New("set bit follows unset bit")
 		}
-		if rem == 1 {
-			foundOne = true
-			count++
-		}
+		count += int(rem)
+		value = value >> 1
 	}
 	return
 }
@@ -28,7 +24,7 @@ func countBits(value uint32) (count int, err error) {
 func ConvertNetmaskToCIDR(input string) (num int, err error) {
 	var octets = strings.Split(input, ".")
 	if len(octets) != 4 {
-		return 0, errors.New("not enough octets")
+		return 0, errors.New("too many or too few octets")
 	}
 	var accum uint32
 	for _, octet := range octets {
