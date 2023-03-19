@@ -4,9 +4,7 @@ netmask - returns the shorthand netmask from an IPv4 netmask string
 
 ## Use
 
-FUNCTIONS
-
 ```Go
+// ConvertNetmaskToCIDR returns CIDR notation from an IPv4 netmask string.
 func ConvertNetmaskToCIDR(input string) (num int, err error)
-func ConvertNetmaskToCIDR returns CIDR notation from an IPv4 netmask string.
 ```
