@@ -1,14 +1,12 @@
-PACKAGE
+# PACKAGE
 
-package netmask
-    import "github.com/karrick/netmask"
+netmask - returns the shorthand netmask from an IPv4 netmask string
 
-    Package netmask returns the shorthand netmask from an IPv4 netmask
-    string.
+## Use
 
 FUNCTIONS
 
+```Go
 func ConvertNetmaskToCIDR(input string) (num int, err error)
-    ConvertNetmaskToCIDR returns CIDR notation from an IPv4 netmask string.
-
-
+func ConvertNetmaskToCIDR returns CIDR notation from an IPv4 netmask string.
+```
